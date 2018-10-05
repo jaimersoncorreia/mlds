@@ -5,11 +5,9 @@ Created on Wed Oct  3 21:49:23 2018
 
 @author: jaimerson
 """
-
 import pandas as pd
 base = pd.read_csv('credit-data.csv')
-base.describe()
-base.loc[base['age'] < 0]
+
 #apagar coluna
 base.drop('age', 1, inplace=True)
 #apagar apenas os registros com problemas
@@ -31,3 +29,7 @@ from sklearn.preprocessing import Imputer
 imputer = Imputer(missing_values='NaN', strategy='mean', axis=0)
 imputer = imputer.fit(previsores[:, 0:3])
 previsores[:, 0:3]= imputer.transform(previsores[:,0:3])
+
+from sklearn.preprocessing import StandardScaler
+scaler = StandardScaler()
+previsores = scaler.fit_transform(previsores)
